@@ -229,6 +229,8 @@ def gss():
         "https://www.amazon.in/dp/B0CGD8HGCJ",
         "https://www.amazon.in/dp/B0BT1FJCWW",
         "https://www.amazon.in/dp/B0CGD8HGCJ",
+        "https://www.amazon.in/dp/B0BT1FJCWW",
+        "https://www.amazon.in/dp/B0CGD8HGCJ",
         
         
         
