@@ -6,6 +6,7 @@ import random
 from bs4 import BeautifulSoup
 import mysql.connector
 import re
+
 from requests_ip_rotator import ApiGateway, EXTRA_REGIONS, ALL_REGIONS
 # import mydatabase 
 import urllib3
@@ -58,8 +59,12 @@ def scrape_page(url):
     # Scrape the page and return the data
 
     # Create gateway object and initialise in 
+    
+    
     key_id = 'AKIAQ3EGRB3CWDYAIVRP'
     secret_key = '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'
+    
+    
     gateway = ApiGateway(url,access_key_id=key_id,access_key_secret=secret_key)
     gateway.start()
 
