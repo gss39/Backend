@@ -8,10 +8,7 @@ from flask import Flask
 def fetch_data():
 
     mydb = mysql.connector.connect(
-        # host="localhost",
-        # user="root",
-        # password="",
-        # database="mydatabase"
+        
 
         host="localhost",
         user="egxcmgbg_brandonly",
