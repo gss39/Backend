@@ -2,16 +2,13 @@
 import mysql.connector
 from flask import Flask
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
-@app.route('/data')
+# @app.route('/data')
 def fetch_data():
 
     mydb = mysql.connector.connect(
-        # host="localhost",
-        # user="root",
-        # password="",
-        # database="mydatabase"
+        
 
         host="localhost",
         user="egxcmgbg_brandonly",
@@ -26,13 +23,13 @@ def fetch_data():
     for i in myresult:
      link  = "https://www.amazon.in/dp/"+i[1]+""
      links.append(link)
-    print(links)
-    return f"this is database links {links}"  
+    
+    return links  
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    app.run() 
+#     app.run() 
     
 
     

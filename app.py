@@ -6,6 +6,7 @@ import random
 from bs4 import BeautifulSoup
 import mysql.connector
 import re
+import test_database
 
 from requests_ip_rotator import ApiGateway, EXTRA_REGIONS, ALL_REGIONS
 # import mydatabase 
@@ -220,21 +221,13 @@ def scrape_pages_mp(urls):
 
 @app.route('/output')
 def gss():
+
+    urls = []
+    all_links = test_database.fetch_data()
+    for li in all_links:
+      urls.append(li)
  
-    urls = {
-
-        "https://www.amazon.in/dp/B08PRXXQB3",
-        "https://www.amazon.in/dp/B01MTQ5M7B",
-        "https://www.amazon.in/dp/B0BT1FJCWW",
-        
-        
-        
-        
-       
-    }
     
-    
-
     # Test the multiprocessed scraper
 
     start = time.time()
@@ -243,6 +236,43 @@ def gss():
     time.sleep(10)
     end = time.time()
     print(f"Time taken for multiprocessed scraper: {end - start} seconds")
+
+    for item1, item2 in zip(urls, data):
+      all = [item1, item2]
+      colors = all[1][0]
+      titles = str(all[1][1][0])
+      discount = all[1][2][0]
+      rating = all[1][3][0]
+      status = all[1][4][0]
+      price = all[1][5][0]
+      sizes = all[1][6]
+      links = all[0]
+      
+
+      color_list = map(str, colors)
+      color = '!'.join(color_list)
+
+      size_list = map(str, sizes)
+      size = '!'.join(size_list)
+     
+      title =  re.sub("[!@#$%^&*...']", " ", titles)
+
+      mydb = mysql.connector.connect(
+        
+
+        host="localhost",
+        user="egxcmgbg_brandonly",
+        password="brandonly!@#",
+        database="egxcmgbg_ecomrce_website"
+      )
+
+      mycursor = mydb.cursor()
+
+      sql = "UPDATE `products` SET `title`='"+title+"',`discount`='"+discount+"',`rating`='"+rating+"',`price`='"+price+"',`status`='"+status+"',`colors`='"+color+"',`sizes`='"+size+"' WHERE product_url ='"+links+"'"
+      mycursor.execute(sql)
+
+      mydb.commit()
+      print("1 record inserted, ID:", mycursor.lastrowid)
     
     return data
     
