@@ -6,16 +6,11 @@ import random
 from bs4 import BeautifulSoup
 import mysql.connector
 import re
-import test_database
-
 from requests_ip_rotator import ApiGateway, EXTRA_REGIONS, ALL_REGIONS
-# import mydatabase 
+import test_database 
 import urllib3
-from flask import Flask
 
-app = Flask(__name__)
-
-
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def specific_string(length):
     # define the specific string
     sample_string = 'pqrstuvwxyaksdjhkasdlkjqluwoelkansldknc'
@@ -31,6 +26,9 @@ def trace_id(length):
     
     return result
     
+t1 = trace_id(random.randint(24, 24))
+t2 = trace_id(random.randint(8, 8))
+
 
 
 
@@ -60,13 +58,8 @@ def scrape_page(url):
     # Scrape the page and return the data
 
     # Create gateway object and initialise in 
-    
-    
-    key_id = 'AKIAQ3EGRB3CWDYAIVRP'
-    secret_key = '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'
-    
-    
-    gateway = ApiGateway(url,access_key_id=key_id,access_key_secret=secret_key)
+    url = 'https://www.amazon.in/dp/B0CGD8HGCJ'
+    gateway = ApiGateway(url)
     gateway.start()
 
     session = requests.Session()
@@ -193,7 +186,6 @@ def scrape_page(url):
     # File.close()
     listdata = [all_colors, all_title,all_discount, all_rating, all_avel, all_price,all_size]
     
-    
     return listdata
     
    
@@ -201,41 +193,41 @@ class ThreadedScraper(threading.Thread):
     def __init__(self, urls):
         super().__init__()
         self.urls = urls
-        return "ok"
 
     def run(self):
         for url in self.urls:
             data = scrape_page(url)
-            return "ok"
             # Process the scraped data
 
 
 def scrape_pages_mp(urls):
      with mp.Pool(10) as p:
         results = p.map(scrape_page, urls)
-        
+        # print(results[0])
 
        
      return results
 
 
-@app.route('/output')
-def gss():
+if __name__ == "__main__":
 
+ 
     urls = []
     all_links = test_database.fetch_data()
     for li in all_links:
       urls.append(li)
- 
-    
+
     # Test the multiprocessed scraper
 
     start = time.time()
     data = scrape_pages_mp(urls)
-    
     time.sleep(10)
     end = time.time()
+    
+
     print(f"Time taken for multiprocessed scraper: {end - start} seconds")
+    
+    
 
     for item1, item2 in zip(urls, data):
       all = [item1, item2]
@@ -276,11 +268,6 @@ def gss():
 
       mydb.commit()
       print("1 record inserted, ID:", mycursor.lastrowid)
-    
-    return data
-    
+      
 
-    
-if __name__ == "__main__":
 
-    app.run() 
