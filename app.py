@@ -227,8 +227,8 @@ def gss():
         "https://www.amazon.in/dp/B01MTQ5M7B",
         "https://www.amazon.in/dp/B0BT1FJCWW",
         "https://www.amazon.in/dp/B0CGD8HGCJ",
-        "https://www.amazon.in/dp/B09VH86YT6",
-        "https://www.amazon.in/dp/B0C1N9CFYW",
+        # "https://www.amazon.in/dp/B09VH86YT6",
+        # "https://www.amazon.in/dp/B0C1N9CFYW",
         
         
         
