@@ -144,13 +144,13 @@ def scrape_page(url):
 
     # retrieving product size--------------------------------------------------
 
-    all_size = []
-    size = soup.select_one(
-        'select[name="dropdown_selected_size_name"]').select('option')
-    size.pop(0)
-    for op in size:
+    # all_size = []
+    # size = soup.select_one(
+    #     'select[name="dropdown_selected_size_name"]').select('option')
+    # size.pop(0)
+    # for op in size:
 
-        all_size.append(op.get_text())
+    #     all_size.append(op.get_text())
         # print(op.get_text())
     # File.write(f"{op.get_text()},")
 
@@ -191,7 +191,7 @@ def scrape_page(url):
     # Delete gateways
     time.sleep(10)
     # File.close()
-    listdata = [all_colors, all_title,all_discount, all_rating, all_avel, all_price,all_size]
+    listdata = [all_colors, all_title,all_discount, all_rating, all_avel, all_price]
     
     
     return listdata
@@ -252,8 +252,8 @@ def gss():
       color_list = map(str, colors)
       color = '!'.join(color_list)
 
-      size_list = map(str, sizes)
-      size = '!'.join(size_list)
+    #   size_list = map(str, sizes)
+    #   size = '!'.join(size_list)
      
       title =  re.sub("[!@#$%^&*...']", " ", titles)
 
@@ -268,7 +268,7 @@ def gss():
 
       mycursor = mydb.cursor()
 
-      sql = "UPDATE `products` SET `title`='"+title+"',`discount`='"+discount+"',`rating`='"+rating+"',`price`='"+price+"',`status`='"+status+"',`colors`='"+color+"',`sizes`='"+size+"' WHERE product_url ='"+links+"'"
+      sql = "UPDATE `products` SET `title`='"+title+"',`discount`='"+discount+"',`rating`='"+rating+"',`price`='"+price+"',`status`='"+status+"',`colors`='"+color+"' WHERE product_url ='"+links+"'"
       mycursor.execute(sql)
 
       mydb.commit()
