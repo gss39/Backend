@@ -184,6 +184,7 @@ def scrape_page(url):
 #   print("Availability = ", available)
 
     # saving the availability and closing the line
+    
     all_avel.append(available)
     # File.write(f"{available},\n")
 
