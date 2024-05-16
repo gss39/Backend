@@ -246,7 +246,8 @@ def gss():
       rating = all[1][3][0]
       status = all[1][4][0]
       price = all[1][5][0]
-      sizes = all[1][6]
+    #   sizes = all[1][6]
+    
       links = all[0]
       
 
