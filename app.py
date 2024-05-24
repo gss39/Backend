@@ -251,7 +251,7 @@ def gss():
     #   sizes = all[1][6]
     
       links = all[0]
-      print(price)
+    #   print(price)
 
       color_list = map(str, colors)
       color = '!'.join(color_list)
