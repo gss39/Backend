@@ -112,7 +112,7 @@ def scrape_page(url):
     all_price = []
     try:
         price = soup.find(
-            "span", attrs={'class': 'a-price-whole'}).string.strip().replace(',', '')
+            "span", attrs={'class': 'aok-offscreen'}).string.strip().replace(',', '')
         # we are omitting unnecessary spaces
         # and commas form our string
     except AttributeError:
@@ -121,7 +121,9 @@ def scrape_page(url):
 
     # saving
     # File.write(f"{price},")
-    all_price.append(price)
+    a = price
+    pr =  a.split(".") # returns ['Hello', ' World!']
+    all_price.append(pr[0])
 
 
     # retrieving product discount------------------------------------------
@@ -249,7 +251,7 @@ def gss():
     #   sizes = all[1][6]
     
       links = all[0]
-      
+      print(price)
 
       color_list = map(str, colors)
       color = '!'.join(color_list)
@@ -261,11 +263,15 @@ def gss():
 
       mydb = mysql.connector.connect(
         
-
         host="localhost",
-        user="egxcmgbg_brandonly",
-        password="brandonly!@#",
-        database="egxcmgbg_ecomrce_website"
+        user="root",
+        password="",
+        database="mydatabase"
+
+        # host="localhost",
+        # user="egxcmgbg_brandonly",
+        # password="brandonly!@#",
+        # database="egxcmgbg_ecomrce_website"
       )
 
       mycursor = mydb.cursor()
